@@ -1,14 +1,85 @@
 const inquirer = require("inquirer");
 
-inquirer 
-.prompt([
+const promptUser = () => {
+return inquirer.prompt ([
     {
         type: 'input',
         name: 'Name',
         message: 'what is your name?'
-    }
-])
-.then(answers => console.log(answers));
+    },
+    {
+        type: 'input',
+        name: 'github',
+        message: ' enter your github username'
+    },
+    {
+        type: 'input',
+        name: 'about',
+        message: 'provide some information about yourself'
+    },
+    
+]);
+.then(projectData => {
+    portfolioData.projects.push(projectData);
+  }
+};
+
+const promptProject =  portfolioData => {
+// If there's no 'projects' array property, create one
+if (!portfolioData.projects) {
+    portfolioData.projects = [];
+  }
+  
+    console.log (`
+    =====================================
+    add a new project
+    =====================================
+    `);
+    return inquirer.prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: 'what is the name of your project?'
+        },
+        {
+            type: 'input',
+            name: 'description',
+            message: 'provide a description of the project (Required)' 
+        },
+        {
+            type: 'checkbox',
+            name: 'languages',
+            message: 'What did you build this project with? (Check all that apply)',
+            choices: ['JavaScript', 'HTML', 'CSS', 'ES6', 'jQuery', 'Bootstrap', 'Node']
+          },
+          {
+            type: 'input',
+            name: 'link',
+            message: 'Enter the GitHub link to your project. (Required)'
+          },
+          {
+            type: 'confirm',
+            name: 'feature',
+            message: 'Would you like to feature this project?',
+            default: false
+          },
+          {
+            type: 'confirm',
+            name: 'confirmAddProject',
+            message: 'Would you like to enter another project?',
+            default: false
+          }
+        ]);
+      
+      };
+
+      promptUser()
+      .then(answers => console.log(answers))
+      .then(promptProject)
+      .then(projectAnswers => console.log(projectAnswers));
+      .then(projectData => {
+        portfolioData.projects.push(projectData);
+      }
 
 //const fs = require('fs');
 //const generatePage = require('./src/page-template');
