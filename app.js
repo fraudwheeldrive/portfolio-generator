@@ -1,4 +1,12 @@
-const inquirer = require("inquirer");
+const inquirer = require("inquirer")
+.then(projectData => {
+  portfolioData.projects.push(projectData);
+  if (projectData.confirmAddProjectData); {
+    return promptProject(portfolioData);
+  } else {
+    return portfolioData;
+  }
+});
 
 const promptUser = () => {
 return inquirer.prompt ([
@@ -16,12 +24,9 @@ return inquirer.prompt ([
         type: 'input',
         name: 'about',
         message: 'provide some information about yourself'
-    },
+    }
     
 ]);
-.then(projectData => {
-    portfolioData.projects.push(projectData);
-  }
 };
 
 const promptProject =  portfolioData => {
@@ -73,13 +78,12 @@ if (!portfolioData.projects) {
       
       };
 
-      promptUser()
-      .then(answers => console.log(answers))
-      .then(promptProject)
-      .then(projectAnswers => console.log(projectAnswers));
-      .then(projectData => {
-        portfolioData.projects.push(projectData);
-      }
+   promptUser()
+   .then(promptProject)
+   .then(portfolioData => {
+     console.log(portfolioData);
+   });
+
 
 //const fs = require('fs');
 //const generatePage = require('./src/page-template');
@@ -91,5 +95,3 @@ if (!portfolioData.projects) {
 
   //console.log('Portfolio complete! Check out index.html to see the output!');
 //});
-
-  
